@@ -1,10 +1,19 @@
-import mongoose from "mongoose";
 import express  from "express";
 import cors from "cors"
 import dotenv from "dotenv"
-import { timeStamp } from "console";
 
 dotenv.config()
+import connectDB from "./db/index";
+
+const serverConnect = async () => {
+    try {
+        await connectDB();
+    } catch (error) {
+        console.error("Database connection failed:", error);
+        process.exit(1);
+    }
+    }
+    serverConnect()
 
 const app = express()
 const PORT = process.env.PORT || 8080
@@ -21,3 +30,6 @@ app.get("/health",(req,res)=>{
 app.listen(PORT ,()=>{
 console.log(`Serving running at ${PORT}`)
 })
+console.log("Connecting to MongoDB:", process.env.MONGODB_URI);
+console.log("Using DB:", process.env.DB_NAME);
+export default app

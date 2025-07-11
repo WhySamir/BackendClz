@@ -32,4 +32,5 @@ console.log(`Serving running at ${PORT}`)
 })
 console.log("Connecting to MongoDB:", process.env.MONGODB_URI);
 console.log("Using DB:", process.env.DB_NAME);
+console.log("Removed account")
 export default app

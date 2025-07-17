@@ -1,6 +1,7 @@
 import express  from "express";
 import cors from "cors"
 import dotenv from "dotenv"
+import taskRoutes from "./routes/taskRoutes";
 
 dotenv.config()
 import connectDB from "./db/index";
@@ -33,4 +34,5 @@ console.log(`Serving running at ${PORT}`)
 console.log("Connecting to MongoDB:", process.env.MONGODB_URI);
 console.log("Using DB:", process.env.DB_NAME);
 console.log("Removed account")
+app.use("/api/tasks", taskRoutes);
 export default app

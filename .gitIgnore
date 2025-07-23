@@ -1,2 +1,31 @@
-node_modules
-env
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.test
+
+# Jest coverage reports
+coverage/
+
+# MongoDB memory server binaries (used internally)
+**/mongodb-binaries/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE-specific
+.vscode/
+.idea/
+
+# Debug/logging files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

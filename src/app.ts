@@ -14,7 +14,9 @@ const serverConnect = async () => {
         process.exit(1);
     }
     }
-    serverConnect()
+    if (process.env.NODE_ENV !== "test") {
+  serverConnect();
+}
 
 const app = express()
 const PORT = process.env.PORT || 8080
@@ -35,4 +37,35 @@ console.log("Connecting to MongoDB:", process.env.MONGODB_URI);
 console.log("Using DB:", process.env.DB_NAME);
 console.log("Removed account")
 app.use("/api/tasks", taskRoutes);
+
+
+app.use(
+  (
+    err: any,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    console.error(err.stack);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong!",
+      error:
+        process.env.NODE_ENV === "development"
+          ? err.message
+          : "Internal server error",
+    });
+  }
+);
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
+
+
+
 export default app
